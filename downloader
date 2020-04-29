@@ -1,0 +1,359 @@
+#!/bin/bash
+
+#ellenörzi hogy a youtube-dl telepítve van-e
+installed=$(dpkg -s youtube-dl | grep installed)
+echo Telepitve van-e youtube-dl $installed
+if [ "" == "$installed" ]
+    then
+        echo "Nincs youtube-dl. Telepítés folyamatban."
+        sudo apt install youtube-dl
+fi
+
+
+echo "Ez a script leszedi a one piece anime epizódjait indavideorol!"
+echo "Ehol elindítod ott csinál mappát az évadnak és oda ment!"
+
+echo "Add meg melyik evad kell. 1-16.évadig megy. írj 0-t hogy minden epizódot leszedjen abszolút számozással!"
+#Melyik évad kell?
+read -p 'Évad: ' seasonvar
+#minden évadnak egy case mivel az url abszolut orderben van számozva de mi évadokra bonta akarjuk tárolni
+case $seasonvar in
+0)
+    echo "Figyelem! Ez az opció letölt 627 részt!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir one_piece
+                episodeurlvar=1
+                episodenamevar=1
+                for i in {1..627}
+                    do
+                        #youtube-dl -f best -o one_piece/"one_piece-s${episodenamevar}.rész.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-{episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Minden elérhető epizód letöltve! Kilépés!"
+        fi 
+;;
+
+1)
+    n=8
+	echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+	read -p "Biztos? (y/n) " -n 1 -r
+	if [[ $REPLY =~ ^[Yy]$ ]]
+	then
+        mkdir season_${seasonvar}
+        episodeurlvar=1 #ez az url-be kell
+        episodenamevar=1 #ez a fájlnév
+		for i in $(seq 1 1 $n)
+            do
+                youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_0${episodeurlvar}_HD
+                episodeurlvar=$((episodeurlvar+1))
+                episodenamevar=$((episodenamevar+1))
+            done
+        echo "Évad letöltése kész! Kilépés!"
+	fi 
+;;
+
+2)
+    n=22
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]
+        then
+            mkdir season_${seasonvar}
+            #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e1.mp4" https://indavideo.hu/video/One_Piece_-_09_HD #külön szedem le az epizodot mert ő az utolso akinek 0 van az urljében
+            echo "one_piece-s${seasonvar}e1@https://indavideo.hu/video/One_Piece_-_09_HD"
+            episodeurlvar=10 #ez az url-be kell, innen indul az evad
+            episodenamevar=2 #ez a fájlnév, 2 mert előtte leszedte az évad első részét
+            for i in {1..21}
+                do
+                    #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                    echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                    episodeurlvar=$((episodeurlvar+1))
+                    episodenamevar=$((episodenamevar+1))
+                done
+            echo "Évad letöltése kész! Kilépés!"
+    fi 
+;;
+
+3)
+    n=17
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=31
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+4)
+    n=13
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=48
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+5)
+    n=9
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=61
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        #echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+6)
+    n=22
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=70
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+7)
+    n=39
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=92
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+8)
+    n=13
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=131
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+9)
+    n=52
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=144
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+10)
+    n=31
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=196
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+11)
+    n=99
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=227
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+12)
+    n=56
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=326
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+13)
+    n=100
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=382
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+14)
+    echo "Figyelem! Ebben az évadban 35 rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=482
+                episodenamevar=1
+                for i in {1..35}
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+15)
+    n=62
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=517
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+
+16)
+    n=49
+    echo "Figyelem! Ebben az évadban ${n} rész van, ami most letöltésre kerül!"
+    read -p "Biztos? (y/n) " -n 1 -r
+        if [[ $REPLY =~ ^[Yy]$ ]]
+            then
+                mkdir season_${seasonvar}
+                episodeurlvar=579
+                episodenamevar=1
+                for i in $(seq 1 1 $n)
+                    do
+                        #youtube-dl -f best -o season_${seasonvar}/"one_piece-s${seasonvar}e${episodenamevar}.mp4" https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD
+                        echo "one_piece-s${seasonvar}e${episodenamevar}@https://indavideo.hu/video/One_Piece_-_${episodeurlvar}_HD"
+                        episodeurlvar=$((episodeurlvar+1))
+                        episodenamevar=$((episodenamevar+1))
+                    done
+                echo "Évad letöltése kész! Kilépés!"
+        fi 
+;;
+esac
