@@ -14,8 +14,10 @@ Vannak benne opciók.
 Használata:
 
 Rövidít:
+
 tinyurl -u <url> -s 
 
 Megmondja mi lett rövidítve:
+
 tinyurl -u <url>
   
