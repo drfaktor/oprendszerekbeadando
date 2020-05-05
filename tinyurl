@@ -1,0 +1,29 @@
+#!/bin/bash
+
+if ! [ -x "$(command -v curl)" ]; then
+  echo 'HIBA! Curl nincs telepítve.' >&2
+  exit 1
+fi
+
+s=1
+while getopts 'u:s' option; do
+        case "$option" in
+           u) u=${OPTARG};;
+           s) s=0;;
+        esac
+done
+
+
+if [ -z "$u" ] ; then
+     echo "Nincs URL megadva!"
+     exit 1
+fi
+
+
+if [ "$s" -eq 1 ] ; then
+        curl "https://unshorten.me/s/$u"
+else
+        curl "http://tinyurl.com/api-create.php?url=$u"
+fi
+
+echo ""
