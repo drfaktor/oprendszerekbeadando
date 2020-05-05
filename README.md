@@ -14,9 +14,9 @@ Használata:
 
 **Rövidít:**
 
-tinyurl -u <url> -s 
+tinyurl -u \<url\> -s 
 
 **Megmondja mi lett rövidítve:**
 
-tinyurl -u <url>
+tinyurl -u \<url\>
   
